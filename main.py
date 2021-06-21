@@ -16,8 +16,11 @@ class Camera:
     props_ = {}
 
     def __init__(self, port:int):
-        self.cam = cv2.VideoCapture(port, cv2.CAP_DSHOW)
-        # self.cam.set(cv2.CAP_OPENNI_DEPTH_GENERATOR, 1)
+        # https://docs.opencv.org/4.5.0/d4/d15/group__videoio__flags__base.html#ga023786be1ee68a9105bf2e48c700294d
+
+        self.cam = cv2.VideoCapture(port, cv2.CAP_DSHOW)  # for Windows
+        # self.cam = cv2.VideoCapture(port, cv2.CAP_V4L2)  # for Linux
+        self.cam.set(cv2.CAP_PROP_FPS, 1)
         self.props_['CAP_PROP_FPS'] = self.cam.get(cv2.CAP_PROP_FPS)
         self.props_['CAP_PROP_PAN'] = self.cam.get(cv2.CAP_PROP_PAN)
         self.props_['CAP_PROP_HUE'] = self.cam.get(cv2.CAP_PROP_HUE)
@@ -78,7 +81,7 @@ class Window:
         self.cam2 = StringVar(root)
         options = [0, 1, 2, 3, 4]
         self.cam2.set(options[1])
-        cam2 = OptionMenu(*(toolbar, self.cam1) + tuple(options))
+        cam2 = OptionMenu(*(toolbar, self.cam2) + tuple(options))
         cam2.grid(row=1, column=4, padx=2, pady=1)
         cam2.configure(width=15)
         self.connectButton2 = Button(toolbar, text="Connect", command=self.connect_cam2)
