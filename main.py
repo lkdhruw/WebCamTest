@@ -20,7 +20,7 @@ class Camera:
 
         self.cam = cv2.VideoCapture(port, cv2.CAP_DSHOW)  # for Windows
         # self.cam = cv2.VideoCapture(port, cv2.CAP_V4L2)  # for Linux
-        self.cam.set(cv2.CAP_PROP_FPS, 1)
+        # self.cam.set(cv2.CAP_PROP_FPS, 1)
         self.props_['CAP_PROP_FPS'] = self.cam.get(cv2.CAP_PROP_FPS)
         self.props_['CAP_PROP_PAN'] = self.cam.get(cv2.CAP_PROP_PAN)
         self.props_['CAP_PROP_HUE'] = self.cam.get(cv2.CAP_PROP_HUE)
